@@ -1,6 +1,6 @@
 # CFDI_a_EXCEL
 La finalidad es que este pequeño programa sea una herramienta más para ayudar al contador o cualquier persona encargada de hacer declaraciones, automatizando una tarea.
-Este proyecto extrae información relevante de todos los CFDI's dentro de un carpeta y las transfiere a excel. Además, agrega un resumen que desglosa los impuestos de cada factura.
+Este proyecto extrae información relevante de todos los CFDI's dentro de un carpeta y la transfiere a excel. Además, agrega un resumen que desglosa los impuestos de cada factura.
 
 ### ¿Cómo se usa?
 - Seleccione el tipo de operación a realizar (Facturas emitidas o Facturas recibidas).
