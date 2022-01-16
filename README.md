@@ -23,4 +23,4 @@ Agregue las razones sociales en lista tal cual aparecen en su factura sin caract
 En resumen, tenga distintas carpetas para las facturas emitidas y recibidas. Si realiza la operación de "Emitidas" sobre facturas recibidas o viceversa, este programa no funcionará correctamente.
 
 ## IMPORTANTE
-Este proyecto utiliza los módulos de openpyxl y cfdicliet de Luis Iturrios. Asegúrese de tener dichos módulos.
+Este proyecto utiliza los módulos de openpyxl y cfdiclient de Luis Iturrios. Asegúrese de tener dichos módulos.
