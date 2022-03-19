@@ -4,11 +4,17 @@ from os import walk
 from datetime import datetime
 from tkinter.constants import W
 import xml.etree.ElementTree as ET
+from black import traceback
+from joblib import PrintTime
+from kivy import kivy_configure
+from numpy import append
 from openpyxl import load_workbook
 from openpyxl.styles import Font, Border, Side
 from cfdiclient import Validacion
 from tkinter import *
 from tkinter import filedialog, ttk, messagebox
+
+from sympy import apart
 
 def GetFacturas(path_egresos_o_ingresos): #Regresa una lista de Facturas, bien sean ingresos o egresos
     list = []
@@ -56,11 +62,19 @@ def Formar_Contenido(path,Facturas_ordenadas,Ingresos_o_Egresos):
         root = tree.getroot()
         
         #--------------------DATOS GENERALES--------------------#
+        Temp_Folios = []
         Folio_Fiscal = factura[:-4].upper()
+        Temp_Folios.append(Folio_Fiscal)
         RFC_Emisor = root.find("{http://www.sat.gob.mx/cfd/3}Emisor").attrib['Rfc']
         RFC_Receptor = root.find("{http://www.sat.gob.mx/cfd/3}Receptor").attrib['Rfc']
-        Razon_Social_Emisor = root.find("{http://www.sat.gob.mx/cfd/3}Emisor").attrib['Nombre']
-        Razon_Social_Receptor = root.find("{http://www.sat.gob.mx/cfd/3}Receptor").attrib['Nombre']
+
+        try:
+            Razon_Social_Emisor = root.find("{http://www.sat.gob.mx/cfd/3}Emisor").attrib['Nombre']
+            Razon_Social_Receptor = root.find("{http://www.sat.gob.mx/cfd/3}Receptor").attrib['Nombre']
+        except KeyError:
+            Razon_Social_Receptor = 'CONSULTAR EN LA PÁGINA'
+            Razon_Social_Emisor = 'CONSULTAR EN LA PÁGINA'
+
         Fecha_Emision = root.get('Fecha')
         FechaTimbrado = root.find("{http://www.sat.gob.mx/cfd/3}Complemento").find('{http://www.sat.gob.mx/TimbreFiscalDigital}TimbreFiscalDigital').attrib['FechaTimbrado']
         RfcProvCertif = root.find("{http://www.sat.gob.mx/cfd/3}Complemento").find('{http://www.sat.gob.mx/TimbreFiscalDigital}TimbreFiscalDigital').attrib['RfcProvCertif']
@@ -314,10 +328,12 @@ def Ejecutar(Nombre_excel, Nombre_Sheet, path, Ingreso_o_Egreso):
         BotProcesar['state']  = 'normal'
     
     except Exception as cause:
-        messagebox.showerror(message='Algo Salió Mal :(\n-Revise operacion ( Emitidas o Recibidas, es correcto ? ) \n-Si los datos son correctos', title='ERROR')
+        messagebox.showerror(message='Algo Salió Mal :(\n-Revise operacion ( Emitidas o Recibidas, es correcto ? \n-Si los datos son correctos', title='ERROR')
         Barra_Progreso['value'] = 0
         Barra_Progreso.update()
         BotProcesar['state']  = 'normal'
+
+        traceback.print_exc()
 
 def Procesar_Entradas():
     Tipo_Calculo = Op.get() #Selector
