@@ -7,7 +7,7 @@ Este proyecto extrae información relevante de todos los CFDI's dentro de una ca
 ### Fundamentos y diagrama de flujo:
 El diagrama de flujo mostrado abajo, nos muestra el funcionamiento base. Las variables abajo mencionadas como: Al-16%, Al-0%, Subtotal, Exento, Nota. Hacen referencia a columnas que se formarán dentro del excel. Mientras que variables coo Subtotal_factura, Subtotal_calculado, Impuesto_factura, etc. Hacen referencia a variables internas; estos valores fueron calculados de forma interna, o bien, extraídos directamente del CFDI.
 
-![Diagrama-de-Flujo-CFDI.png](https://postimg.cc/5HR0zf6r){length='300px'}
+[Diagrama-de-Flujo-CFDI.png](https://postimg.cc/5HR0zf6r){width=100 height=200}
 
 Existen dos funciones que representan el motor de este programa, la principal es la indicada como "CFDI", al terminar esta función pasará al siguiente CFDI hasta terminar de procesar todos los .xml existentes en la carpeta correspondiente. El proceso llamado: "FORMAR_CONTENIDO", es, en realidad, una función interna que genera un arreglo con la información necesaria para ser insertada en cada fila
 
