@@ -1,10 +1,14 @@
+[![CFDI-a-EXCEL-Miniatura-1.png](https://i.postimg.cc/qRH1nkpn/CFDI-a-EXCEL-Miniatura-1.png)](https://postimg.cc/QBSgZZ9x)
+
 # CFDI_a_EXCEL
 La finalidad es que este pequeño programa sea una herramienta más para ayudar al contador o cualquier persona encargada de hacer declaraciones, automatizando una tarea.
 Este proyecto extrae información relevante de todos los CFDI's dentro de una carpeta y la transfiere a excel. Además, agrega un resumen que desglosa los impuestos de cada factura.
 
 ### ¿Cómo se usa?
+[![Showcase.gif](https://i.postimg.cc/FszVYf08/Showcase.gif)](https://postimg.cc/dLMyXVHj)
+
 - Seleccione el tipo de operación a realizar (Facturas emitidas o Facturas recibidas).
-- Seleccione el el documento de excel donde se generará una nueva hoja con la información deseada.
+- Seleccione el documento de excel donde se generará una nueva hoja con la información deseada.
 - Indique un nombre para esa hoja.
 - Seleccion en: "Procesar" y espere a que el programa termine de procesar toda la información.
 
