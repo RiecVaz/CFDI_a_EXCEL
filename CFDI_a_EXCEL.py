@@ -5,16 +5,11 @@ from datetime import datetime
 from tkinter.constants import W
 import xml.etree.ElementTree as ET
 from black import traceback
-from joblib import PrintTime
-from kivy import kivy_configure
-from numpy import append
 from openpyxl import load_workbook
 from openpyxl.styles import Font, Border, Side
 from cfdiclient import Validacion
 from tkinter import *
 from tkinter import filedialog, ttk, messagebox
-
-from sympy import apart
 
 def GetFacturas(path_egresos_o_ingresos): #Regresa una lista de Facturas, bien sean ingresos o egresos
     list = []
@@ -128,7 +123,7 @@ def Formar_Contenido(path,Facturas_ordenadas,Ingresos_o_Egresos):
         #Estatus_Cancelacion = 'Prueba' 
         #Estado_Comprobante = 'Vigente' 
         
-        if (Ingresos_o_Egresos):
+        if (Ingresos_o_Egresos): #INGRESOS
             if(Estado_Comprobante == 'Vigente'):
                 Fecha_Cuadro = Fecha_Emision[:-9]
                 if(Razon_Social_Receptor == 'PUBLICO EN GENERAL'):
@@ -139,7 +134,7 @@ def Formar_Contenido(path,Facturas_ordenadas,Ingresos_o_Egresos):
                 Fecha_Cuadro, Folio, Razon_Social_Receptor, SubTotal_Cuadro, Al_16, Al_0 = ["","","",0.0,0.0,0.0]
             
             Contenido.append([Folio_Fiscal, RFC_Emisor,Razon_Social_Emisor,RFC_Receptor,Razon_Social_Receptor,Fecha_Emision,FechaTimbrado,RfcProvCertif,Total,Efecto_Comprobante,Estatus_Cancelacion, Estado_Comprobante, '',Fecha_Cuadro,Folio,Razon_Social_Receptor,SubTotal_Cuadro,Al_16,Al_0])
-        else:  
+        else: # EGRESOS 
             def Calcular_Impuesto(Dis, T_16, T_0,Total):
                 #Valores predeterminados
                 SubTotal_Resultado = 0
@@ -199,12 +194,10 @@ def Formar_Contenido(path,Facturas_ordenadas,Ingresos_o_Egresos):
                     else:
                         if(float(Descuento) == 0):
                             SubTotal_Cuadro,Al_16, Al_0 = Calcular_Impuesto(False, Tasa_16, Tasa_0, Total)
-                            Nota = ''
-                            Exento_value = 0.0
                         else:
                             SubTotal_Cuadro,Al_16, Al_0 = Calcular_Impuesto(True, Tasa_16, Tasa_0, Total)
-                            Nota = ''
-                            Exento_value = 0.0
+                    Nota = ''
+                    Exento_value = 0.0
                 else:
                     Fecha_Cuadro, SubTotal_Cuadro, Al_16, Al_0, Exento_value, Nota = ['',0.0,0.0,0.0,0.0,'NO DEDUCIBLE']
 
@@ -333,7 +326,7 @@ def Ejecutar(Nombre_excel, Nombre_Sheet, path, Ingreso_o_Egreso):
         Barra_Progreso.update()
         BotProcesar['state']  = 'normal'
 
-        traceback.print_exc()
+        print(traceback.print_exc()) #Imprime errores
 
 def Procesar_Entradas():
     Tipo_Calculo = Op.get() #Selector
@@ -361,7 +354,6 @@ def Buscar_path_XML():
 
 def Buscar_path_Excel():
     Ruta.set(filedialog.askopenfilename(title="Ubicación del Excel", filetypes=[("Excel (.xlsx)","*.xlsx")]))
-
 
 Window = Tk()
 Window.title('CFDI a EXCEL v1.1 Alpha')
